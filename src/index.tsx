@@ -1,18 +1,33 @@
+
 import createHistory from 'history/createBrowserHistory' 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Router} from 'react-router' 
+import * as reducers from './ducks'
+import { Provider } from 'react-redux'
+import {Router} from 'react-router'
+
+import { combineReducers, createStore, applyMiddleware  } from 'redux'
+import thunk from 'redux-thunk'
+
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker'
 
+
+const store = createStore( combineReducers(
+  {
+    ...reducers
+  }), applyMiddleware(thunk))
 const history = createHistory()
 
 
 ReactDOM.render(
+ <Provider store={ store }>
   <Router history={history}>
-    <App/>
-  </Router>,
-  document.getElementById('root') as HTMLElement
+      <App/>
+    </Router>
+  </Provider>,
+
+ document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
