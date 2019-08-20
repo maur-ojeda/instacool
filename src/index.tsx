@@ -12,12 +12,12 @@ import thunk from 'redux-thunk'
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker'
-
+import services from 'src/services'
 
 const store = createStore( combineReducers(
   {
     ...reducers
-  }), applyMiddleware(thunk))
+  }), applyMiddleware(thunk.withExtraArgument(services)))
 const history = createHistory()
 
 
