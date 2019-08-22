@@ -5,9 +5,10 @@ import * as ReactDOM from 'react-dom';
 import * as reducers from './ducks'
 import { Provider } from 'react-redux'
 import {Router} from 'react-router'
-
 import { combineReducers, createStore, applyMiddleware  } from 'redux'
 import thunk from 'redux-thunk'
+
+import { reducer as formReducer } from 'redux-form'
 
 import App from './App';
 import './index.css';
@@ -16,7 +17,8 @@ import services from 'src/services'
 
 const store = createStore( combineReducers(
   {
-    ...reducers
+    ...reducers,
+    form: formReducer
   }), applyMiddleware(thunk.withExtraArgument(services)))
 const history = createHistory()
 
@@ -24,7 +26,7 @@ const history = createHistory()
 ReactDOM.render(
  <Provider store={ store }>
   <Router history={history}>
-      <App/>
+      <App history={history}/>
     </Router>
   </Provider>,
 

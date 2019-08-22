@@ -12,6 +12,13 @@ import * as firebase from 'firebase'
   
   firebase.initializeApp(config);
 
+
+  const firestore = firebase.firestore()
+  
   export const auth = firebase.auth()
-  export const db = firebase.firestore()
+  export const db = firestore
   export const storage = firebase.storage()
+
+
+
+  
